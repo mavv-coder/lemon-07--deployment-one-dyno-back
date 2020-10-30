@@ -23,6 +23,7 @@ COPY ./ ./
 RUN npm install
 RUN npm run build
 
+
 # Release
 FROM base AS release
 COPY --from=build-backend /usr/app/dist ./
