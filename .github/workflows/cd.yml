@@ -19,7 +19,8 @@ jobs:
           curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
           heroku container:login
       - name: Build docker image
-        run: docker build -t ${{secrets.HEROKU_APP_NAME}}:${{github.run_id}} .
+        run: docker build --build-arg SSH_PRIVATE_KEY=${{ secrets.SSH_PRIVATE_KEY }} --build-arg FRONT_REPOSITORY_URL=${{ secrets.FRONT_REPOSITORY_URL }} -t ${{ secrets.HEROKU_APP_NAME }}:${{ github.run_id }} .
+      - name: Deploy docker image
       - name: Deploy docker image
         run: |
           docker tag ${{secrets.HEROKU_APP_NAME}}:${{github.run_id}} registry.heroku.com/${{secrets.HEROKU_APP_NAME}}/web
