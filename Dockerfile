@@ -17,7 +17,6 @@ RUN git clone $FRONT_REPOSITORY_URL ./
 RUN npm install
 RUN npm run build
 
-
 # Build backend
 FROM base AS build-backend
 COPY ./ ./
